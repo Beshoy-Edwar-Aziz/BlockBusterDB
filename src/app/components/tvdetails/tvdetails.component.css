@@ -1,0 +1,48 @@
+.sec{
+    padding: 0;
+}
+.maincolor{
+    background-color: #141414;
+}
+.background-color-videos{
+    background: linear-gradient(14deg, rgba(0,0,0,1) 11%, rgba(20,20,20,1) 94%);
+}
+.close-background{
+    opacity: 1;
+    animation: close .4s   1  forwards;
+}
+@keyframes close {
+    from{
+        opacity: 1;
+    }
+    to{
+        opacity: 0;
+    }
+}
+.open-background{
+    opacity: 0;
+    animation: open .4s   1  forwards;
+}
+@keyframes open {
+    from{
+        opacity: 0;
+    }
+    to{
+        opacity: 1;
+    }
+}
+.close-video{
+    background-color: #0a84ff;
+    color: #fff;
+    border: none;
+}
+.close-video:hover{
+    background-color: #000;
+    transition: background-color .2s;
+}
+.tv-videos:hover{
+    background-color: #0a84ff;
+    padding: 1px;
+    transition: background-color .2s;
+    cursor: pointer;
+}

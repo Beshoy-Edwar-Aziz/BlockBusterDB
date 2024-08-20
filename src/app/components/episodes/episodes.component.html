@@ -1,0 +1,25 @@
+<app-loading-episodes *ngIf="flag"></app-loading-episodes>
+<section class="sec">
+    <div class="w-100 min-vh-100 DM-sans d-flex align-items-center text-white" [ngStyle]="{backgroundImage:'url('+ image +')'}" style="background-repeat: repeat;  background-position: center center ;background-size: cover;">
+        <div class="d-block container">
+            <h2 class="display-4 ">{{episodeData.name}}</h2>
+            <div class="w-50">
+                <p>{{episodeData.overview}}</p>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="maincolor DM-sans text-white">
+    <div class="container">
+        <h3 class="fw-bold">Episodes</h3>
+        <owl-carousel-o [options]="customOptions2" >
+            <ng-template carouselSlide *ngFor="let y of otherEpisodes.episodes;trackBy:trackByFn">
+                <a [routerLink]="['/episode/'+'/'+URL.id+'/'+y.season_number+'/'+y.episode_number]" class="text-reset text-decoration-none text-center" (click)="triggerRoute()">
+                <img [src]="baseUrlImg+y.still_path" alt="BlockBuster" class="rounded-3 px-1 w-100" onerror="this.onerror=null; this.src='../../../assets/kiryu.jpg'">
+                <span class="text-white DM-sans">S{{y.season_number}}/E{{y.episode_number}}</span>
+                <h3 class="DM-sans fw-semibold mb-3 text-white text-center">{{y.name}}</h3>
+                </a>
+            </ng-template>
+        </owl-carousel-o>
+    </div>
+</section>

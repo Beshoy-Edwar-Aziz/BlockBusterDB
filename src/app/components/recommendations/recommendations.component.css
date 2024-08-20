@@ -1,0 +1,55 @@
+.btnOfMenu{
+    background-color: transparent;
+    border:none;
+    padding: 6px;
+    transition: .3s,.3s background-color,color;
+}
+.btnOfMenu:hover{
+    background-color: #000;
+    color: #fff;
+}
+.btnOfMenu:focus{
+    background-color: #000;
+    color: #fff;
+}
+
+.animateTab{
+    animation: openTab .6s 1 forwards;
+}
+.animateCloseTab{
+    animation:closeTab .3s 1;
+}
+@keyframes openTab {
+    from {
+       opacity: 0;
+                   }
+    to {
+        opacity: 1;
+    }
+}
+@keyframes closeTab{
+    from {opacity: 1;}
+    to {opacity: 0;}
+}
+
+.imgOfCast{
+    border-radius: 20%;
+}
+.imgEnlarge{
+    transition: transform .5s;
+}
+.imgEnlarge:hover{
+    transform: scale(1.3);
+}
+.load-recommendation-list{
+    position: relative;
+    animation: opens .5s   1  forwards;
+}
+@keyframes opens {
+    from {top: 100%;}
+    to {top:0;}
+}
+.menu{
+    background: rgb(0,0,0);
+    background: linear-gradient(315deg, rgba(0,0,0,1) 0%, rgba(10,132,255,1) 100%);
+}

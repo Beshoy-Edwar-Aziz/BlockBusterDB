@@ -1,0 +1,48 @@
+<main>
+<div class="container">
+    <div class="menu rounded-pill p-3">
+        <div class="tabs d-flex gap-3 DM-sans" (click)="openTab($event)">
+            <button class="btnOfMenu rounded-pill " id="movieInfo">Movie Info</button>
+            <button class="btnOfMenu rounded-pill " id="recommend">Recommendations</button>
+            <button class="btnOfMenu rounded-pill " id="similartothis">More Like This</button>
+        </div>
+    </div>
+    <div class="content1 d-none mt-3 py-3 px-5 rounded">
+        <div class="row">
+            <owl-carousel-o [options]="customOptions">
+            <ng-template carouselSlide *ngFor="let cred of creditList;trackBy:trackByFn">
+                <!-- <div class="d-flex flex-column justify-content-center align-items-center "> -->
+                    <a [routerLink]="['/actordetail/'+'/'+cred?.id]" class="text-decoration-none" (click)="closeTrailerOnClick()">
+                        <img [src]="baseUrlImg + cred?.profile_path" [alt]="cred?.name" class="imgOfCast w-100" onerror="this.onerror=null; this.src='../../../assets/PlaceHolderImage.png'">
+                        <h5 class="text-white text-center">{{cred?.name}}</h5>
+                    </a>
+                    <p class="text-white text-center" >{{cred?.character}}</p>
+                <!-- </div> -->
+                
+            </ng-template>
+        </owl-carousel-o>
+        </div>
+    </div>
+    <div class="content2 d-none mt-3 py-3 px-5 rounded">
+        <div class="row">
+            <div class="col-12 col-lg-2" *ngFor="let rec of recommendationList;trackBy:trackByFn">
+                <a [routerLink]="['/details/'+'/'+rec?.id]" class="text-reset text-decoration-none" [ngClass]="flag==true?'d-none':' '" (click)="open(rec?.id)" (click)="closeTrailerOnClick()">
+                    <img [src]="baseUrlImg + rec?.poster_path" [alt]="rec?.title" class="w-100 imgEnlarge" onerror="this.onerror=null; this.src='../../../assets/PlaceHolderImage.png'">
+                    <h5 class="text-white text-center" id="rec">{{rec?.title}}</h5>
+                </a>
+                <app-loading *ngIf="flag"></app-loading>
+            </div>
+        </div>
+    </div>
+    <div class="content3 d-none mt-3 py-3 px-5 rounded">
+        <div class="row">
+            <div class="col-12 col-lg-2" *ngFor="let similar of SimilarList;trackBy:trackByFn">
+                <a [routerLink]="['/details/'+'/'+similar?.id]" class="text-reset text-decoration-none" (click)="open(similar?.id)" (click)="closeTrailerOnClick()">
+                    <img [src]="baseUrlImg + similar?.poster_path" [alt]="similar?.title" class="w-100 imgEnlarge" onerror="this.onerror=null; this.src='../../../assets/PlaceHolderImage.png'">
+                    <h5 class="text-white text-center">{{similar?.title}}</h5>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+</main>

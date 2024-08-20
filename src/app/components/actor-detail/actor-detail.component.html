@@ -1,0 +1,33 @@
+<app-loading *ngIf="flag"></app-loading>
+<section class="bg-main">
+    <div class="container" >
+        <div class="row" [ngClass]="flag?'d-none':' '">
+            <div class="col-md-4">
+                <img [src]="baseUrlImg+Actordetails?.profile_path" class="w-100" [alt]="Actordetails?.name">
+            </div>
+            <div class="col-md-8 text-white DM-sans">
+                <h1>Biography</h1>
+                <p>{{Actordetails?.biography}}</p>
+                <p><span class="fw-bold">Date of Birth</span> : {{Actordetails?.birthday}}</p>
+                <p><span class="fw-bold">Place of Birth</span> : {{Actordetails?.place_of_birth}}</p>
+            </div>
+        </div>
+        <div class="mt-3">
+            <h2 class="text-white" [ngClass]="flag?'placeholder-glow':' '">Known For:</h2>
+        </div>
+        <div class="container mt-5">
+        <owl-carousel-o [options]="customOptions">
+            <ng-template carouselSlide *ngFor="let movie of actorMovieDetails;trackBy:trackByFn">
+                <a [routerLink]="['/details/'+'/'+movie?.id]" class="text-reset text-decoration-none">
+                    <img [src]="baseUrlImg+movie?.poster_path" onerror="this.onerror=null; this.src='../../../assets/PlaceHolderImage.png'" alt="BlockBuster" class="rounded-3 px-1">
+                    <h3 class="DM-sans fw-semibold mb-3 text-white text-center" [ngClass]="flag?'placeholder-wave':''">{{movie?.title}}</h3>
+                </a>
+                <div class="d-flex justify-content-center ">
+                    <span class="DM-sans fw-semibold text-secondary">{{movie?.release_date.slice(0,4)}}</span>
+                    <span class="text-white text-center">-Movie</span>
+                </div>
+            </ng-template>
+      </owl-carousel-o>
+    </div>
+    </div>
+</section>

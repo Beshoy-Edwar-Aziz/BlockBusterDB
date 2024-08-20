@@ -1,0 +1,95 @@
+<main class="maincolor">
+<section class="sec">
+    <div class="w-100 min-vh-100 DM-sans d-flex align-items-center text-white background open-background" [ngStyle]="{backgroundImage:'url('+ image +')'}" style="background-repeat: repeat;  background-position: center center ;background-size: cover;">
+        <div class="d-block container show-details">
+            <h2 class=" fw-bold DM-sans display-4 mb-3">{{TVDetails.name}}</h2>
+            <div class="d-flex gap-2">
+                <p>TV Series</p> 
+                <!-- <p *ngFor="let x of TVDetails.networks">{{x.name}}</p> -->
+                <p>{{TVDetails.first_air_date?.slice(0,4)}}</p>
+                <div>
+                    <i class="fas fa-star"></i> {{TVDetails.vote_average}}
+                </div>
+                
+            </div>
+            <div class="w-50">
+                <p class="">{{TVDetails.overview}}</p>
+            </div>
+            <div class="w-25 d-flex gap-2" *ngFor="let x of TVDetails.networks">
+                <img [src]="baseUrlImg+x.logo_path" class="w-25" [alt]="x.name">
+            </div>
+        </div>
+    </div>
+    <div class="d-none video w-100 min-vh-100">
+        <iframe [src]="baseUrlVid+vidKey+'?autoplay='+autoplay|sanitizeURL" class="w-100 min-vh-100" frameborder="0"></iframe>
+    </div>
+    <button class="close-video mt-3 ms-3 rounded p-1 d-none" (click)="stopVideo()">Close Video</button>
+</section>
+<div class="row container-fluid DM-sans">
+<section class="maincolor col-md-8">
+    <div class="container">
+        <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+            <li class="nav-item" role="presentation" *ngFor="let x of TVDetails.seasons;index as i">
+              <button *ngIf="x.season_number!=0" class="nav-link" id="pills-home-tab" data-bs-toggle="pill" [attr.data-bs-target]="'#Season'+x.season_number" type="button" role="tab" aria-controls="pills-home" aria-selected="true" (click)="takeSeasonNumber($event,i)">{{x.name}}</button>
+            </li>
+          </ul>
+          <div class="tab-content" id="pills-tabContent">
+            <div *ngFor="let x of TVDetails.seasons" class="tab-pane fade show" [attr.id]="'Season'+x.season_number" role="tabpanel" aria-labelledby="pills-home-tab" tabindex="0">
+                <div class="w-100 d-flex justify-content-center" *ngIf="flag">
+                    <app-loading-episodes></app-loading-episodes>
+                    </div>
+                <owl-carousel-o [options]="customOptions2">
+                    <ng-template carouselSlide *ngFor="let y of TVEpisodes.episodes;trackBy:trackByFn">
+                        <a [routerLink]="['/episode/'+'/'+id.id+'/'+y.season_number+'/'+y.episode_number]" class="text-reset text-decoration-none text-center">
+                        <img [src]="baseUrlImg+y.still_path" alt="BlockBuster" class="rounded-3 px-1 w-100" onerror="this.onerror=null; this.src='../../../assets/kiryu.jpg'">
+                        <span class="text-white DM-sans">S{{y.season_number}}/E{{y.episode_number}}</span>
+                        <h3 class="DM-sans fw-semibold mb-3 text-white text-center">{{y.name}}</h3>
+                        </a>
+                    </ng-template>
+                </owl-carousel-o>
+            </div>
+            
+          </div>
+    </div>
+    <div class="container">
+        <h4 class="text-white mb-2">Production Companies</h4>
+        <div class="d-flex flex-column gap-3">
+            <div *ngFor="let Detail of TVDetails.production_companies" >
+                <img [src]="baseUrlImg+Detail.logo_path" [alt]="Detail.name" class="w-25">
+            </div>
+        </div>
+    </div>
+    <div class="container mt-3">
+        <h4 class="mb-2 text-white">Languages Spoken</h4>
+        <div *ngFor="let Detail of TVDetails.spoken_languages">
+            <div class="text-white d-flex gap-2">
+                <p>{{Detail.english_name}}</p>
+            </div>
+        </div>
+    </div>
+    <div class="container text-white">
+        <h4>TagLine</h4>
+        <div>
+            <p>{{TVDetails.tagline}}</p>
+        </div>
+    </div>
+    
+</section>
+<div class="col-md-4 background-color-videos rounded my-3 DM-sans text-white">
+    <div class="d-flex flex-column">
+        <h4 class="pt-2">Trailers and Videos</h4>
+        <div *ngFor="let TVVideo of TVShowVideos">
+            <div class="row my-3 tv-videos rounded" (click)="chooseVideoToWatch(TVVideo.key)">
+                <div class="col-md-6">
+                    <img [src]="VideoThumbnail+TVVideo.key+'/sddefault.jpg'" [alt]="" class="w-100 rounded">
+                </div>
+                <div class="col-md-6">
+                    <p>{{TVVideo.name}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+</main>

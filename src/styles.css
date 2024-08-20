@@ -1,1 +1,18 @@
-/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700;9..40,800&family=DM+Serif+Display&family=Source+Sans+3:wght@400;700;800&display=swap');
+.fs-18{
+    font-size: 18px;
+}
+section{
+    padding: 100px 0;
+}
+.owl-theme .owl-nav [class*=owl-]{
+    border-radius: 50%;
+    width: 10px;
+    height: 10px;
+}
+.owl-theme .owl-nav [class*=owl-]:hover{
+    background-color: #0a84ff;
+}
+.DM-sans{
+    font-family: 'DM Sans', sans-serif;
+}

@@ -1,0 +1,127 @@
+.DM-sans{
+    font-family: 'DM Sans', sans-serif;
+}
+.backdrop{
+    background-color: rgba(0,0,0,0.5);
+    padding: 80px 0;
+    color: #fff;
+}
+.secOfDetails{
+    padding: 0!important;
+    filter: blur(8px);   
+}
+.buttonPlay{
+    background-color: #0a84ff;
+    padding: 10px 20px;
+    color: #fff;
+    border: none;
+    transition: .3s box-shadow;
+}
+.buttonPlay:hover{
+    -webkit-box-shadow: inset 2px 2px 70px 7px rgba(0,0,0,0.75);
+-moz-box-shadow: inset 2px 2px 70px 7px rgba(0,0,0,0.75);
+box-shadow: inset 2px 2px 70px 7px rgba(0,0,0,0.75);
+}
+.buttonTrailer{
+    background-color: #68778b;
+    padding: 10px 20px;
+    color: #fff;
+    border: none;
+    transition: .3s background-color;
+}
+.buttonTrailer:hover{
+    background-color: #313131;
+}
+.background-color{
+    background-color: #0c1e35;
+}
+/* Animations for loading Page */
+.enter{
+animation: enter .5s 1  forwards;
+position: relative;
+}
+@keyframes enter {
+    from{
+        right: 100%;
+    }
+    to{
+        right: 0;
+    }
+}
+.moveright{
+    position: relative;
+    animation: moveright 1s 1 forwards;
+}
+@keyframes moveright {
+ from{right: 0;}
+ to{right: 200%;}   
+}
+.moveleft{
+    position: relative;
+    animation: moveleft 1s 1 forwards;
+}
+@keyframes moveleft {
+ from{right: 0;}
+ to{right: -200%;}   
+}
+/* the following to create the effects that preceeds the playing of video of the movie */
+.darkenTheRoom{
+    background-color: #000;
+    transition: background-color 1s;
+}
+.trans{
+    background-color: transparent;
+    transition: all 1s;
+}
+.closeSesame{
+    display: none;
+    transition: display 1s;
+}
+.loadVideo iframe{
+    width: 100% ;
+    height: 100vh;
+}
+.offcanvas-body{
+    background: linear-gradient(14deg, rgba(0,0,0,1) 16%, rgba(10,132,255,1) 87%);
+}
+/* fixing youtube controls not responding within modal */
+.modal.fade .modal-dialog {
+    -webkit-transition: -webkit-transform 0.3s ease-out;
+       -moz-transition: -moz-transform 0.3s ease-out;
+         -o-transition: -o-transform 0.3s ease-out;
+            transition: transform 0.3s ease-out;
+  }
+  .background-videos:hover{
+    background-color: #000;
+    transition: background-color .5s;
+    cursor: pointer;
+  }
+  .navbar-toggler{
+    background-color: #fff;
+  }
+  .close:hover{
+    cursor: pointer;
+    transform: scale(1.1);
+    transition: transform  .5s;
+  }
+  .modal.in .modal-dialog {
+  
+  }
+
+  /* To modify the background image of the movie */
+  /* @media screen and (min-width:300px) and (max-width:700px) {
+    .secOfDetails{
+        height: 400vh;
+    }
+  }
+  @media screen and (min-width:701px) and (max-width:1200px) {
+    .secOfDetails{
+        height: 350vh;
+    }
+    
+  }
+  @media screen and (min-width:1201px) {
+    .secOfDetails{
+        height: 250vh;
+    } */
+/* } */

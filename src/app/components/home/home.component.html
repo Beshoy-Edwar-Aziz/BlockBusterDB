@@ -1,0 +1,118 @@
+<div class="w-100 min-vh-100" *ngIf="trendingTVList.length==0">
+    <app-loading-episodes ></app-loading-episodes>
+</div>
+<header class="position-relative">
+      <div class="text-center">
+        <div class="min-vh-100 text-white d-flex justify-content-center align-items-center flex-column ">
+            <div class="w-75">
+                <h1 class="display-2 DM-sans titleStyle">Get endless entertainment, and the shows and movies you love.</h1>
+            </div>
+            <div class="w-50 mt-3">
+                <p class="DM-sans fs-18">Stream full seasons of exclusive series, current-season episodes, hit movies, Dali originals, kids shows, and more.</p>
+            </div>
+         </div>
+    </div>
+    <div class="container">
+    <div class="position-absolute top-100  start-50 translate-middle iframe">
+      <iframe [src]="baseUrlVid+vidData[0]?.key|sanitizeURL" frameborder="0" class="rounded"></iframe>    
+    </div>
+    </div>
+    </header>
+    <main class="bg-main">
+        <section class="text-center">
+            <div class="mt-5">
+                <h2 class="pt-5 DM-sans text-white">Popular streaming movies & series</h2>
+             </div>
+             <div class="mt-5 text-white">
+                <owl-carousel-o [options]="customOptions">
+                    <ng-template carouselSlide *ngFor="let movie of movieList;trackBy:trackByFn">
+                      <a [routerLink]="['/details/'+'/'+movie.id]" class="text-reset text-decoration-none">
+                      <img [src]="baseUrlImg+movie.poster_path" alt="BlockBuster" class="rounded-3 px-1">
+                      <h3 class="DM-sans fw-semibold mb-3">{{movie.original_title}}</h3>
+                    </a>
+                      <span class="DM-sans fw-semibold text-secondary">{{movie.release_date.slice(0,4)}}</span>
+                      <span class="text-main">-Movie</span>
+                    </ng-template>
+              </owl-carousel-o>
+            </div>
+        </section>
+        <section>
+            <div class="container">
+                <h3 class="DM-sans fw-semibold text-white">Popular TV series right now</h3>
+                <div class="row mt-4">
+                    <div class="col-md-8">
+                        <div class="row gy-3">
+                            <div class="col-md-4" *ngFor="let tv of tvList;trackBy:trackByFn">
+                                <a [routerLink]="['/TVDetail/'+'/'+tv.id]" class="text-reset text-decoration-none">
+                                    <img [src]="baseUrlImg+tv.poster_path" class="w-100 rounded" alt="BlockBusterMovie">
+                                    <h4 class="DM-sans fw-bold text-white text-center fs-16">{{tv.name}}</h4>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 text-white border rounded-2 p-3 border-color-main">
+                        <h2 class="border-bottom border-color-main DM-sans fw-semibold fs-24 py-2">The Top 5 Shows</h2>
+                        <div class="row my-3" *ngFor="let five of topFive;trackBy:trackByFn;index as i;">
+                            <div class="col-md-6">
+                                <img [src]="baseUrlImg+five.poster_path" [alt]="baseUrlImg+five.name" class="w-100">
+                            </div>
+                            <div class="col-md-6">
+                                <a [routerLink]="['/TVDetail/'+'/'+five.id]" class="text-reset text-decoration-none">
+                                    <p class="fw-bold">#{{i+1}}</p>
+                                    <h3 class="fs-16">{{five.name}}</h3>
+                                    <p class="fs-16 text-secondary">{{five.first_air_date.slice(0,4)}}</p>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section>
+            <div class="container">
+                <div class="menu rounded-pill p-3">
+                    <div class="tabs d-flex justify-content-center gap-3 DM-sans" (click)="openTab($event)">
+                        <button class="btnOfMenu rounded-pill " id="movieInfo">Movies</button>
+                        <button class="btnOfMenu rounded-pill " id="recommend">Recommendations</button>
+                        <button class="btnOfMenu rounded-pill " id="similartothis">More Like This</button>
+                    </div>
+                </div>
+                <div class="content1 d-none mt-3 py-3 px-5 rounded">
+                    <div class="mt-5 text-white">
+                        <owl-carousel-o [options]="customOptions2">
+                            <ng-template carouselSlide *ngFor="let movie of movieList;trackBy:trackByFn">
+                              <a [routerLink]="['/details/'+'/'+movie.id]" class="text-reset text-decoration-none">
+                              <img [src]="baseUrlImg+movie.poster_path" alt="BlockBuster" class="rounded-3 px-1">
+                              <h3 class="DM-sans fw-semibold mb-3">{{movie.original_title}}</h3>
+                            </a>
+                              <span class="DM-sans fw-semibold text-secondary">{{movie.release_date.slice(0,4)}}</span>
+                            </ng-template>
+                      </owl-carousel-o>
+                    </div>
+                </div>
+                <div class="content2 d-none mt-3 py-3 px-5 rounded">
+                    <div class="mt-5 text-white">
+                        <app-loading *ngIf="!flag"></app-loading>
+                        <owl-carousel-o [options]="customOptions2">
+                            <ng-template carouselSlide *ngFor="let tv of tvList;trackBy:trackByFn">
+                              <a [routerLink]="['/TVDetail/'+'/'+tv.id]" class="text-reset text-decoration-none text-center">
+                              <img [src]="baseUrlImg+tv.poster_path" alt="BlockBuster" class="rounded-3 px-1">
+                              <h3 class="DM-sans fw-semibold mb-3">{{tv.name}}</h3>
+                            </a>
+                              <span class="DM-sans fw-semibold text-secondary text-center">{{tv.first_air_date.slice(0,4)}}</span>
+                            </ng-template>
+                      </owl-carousel-o>
+                    </div>   
+                </div>
+                </div>
+                <div class="content3 d-none mt-3 py-3 px-5 rounded">
+                    <div class="row">
+                        <div class="col-md-2" >
+                            
+                        </div>
+                    </div>
+                </div>
+            
+            </section>
+    </main>
+    
